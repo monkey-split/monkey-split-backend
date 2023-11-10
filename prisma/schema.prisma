@@ -11,9 +11,55 @@ generator client {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  email       String   @unique
+  name        String
+  password    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  memberships Membership[]
+}
+
+model Membership {
+  id            Int      @id @default(autoincrement())
+  name          String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int
+  createdSplits Split[] @relation(name: "splitCreatedBy")
+  splits        Split[]
+  spent         Spending[]
+  owes          Owing[]
+}
+
+model Split {
+  id          Int @id @default(autoincrement())
+  name        String
+  description String
+  creator     Membership  @relation(fields: [createdBy], references: [id], name: "splitCreatedBy")
+  createdBy   Int
+  members     Membership[]
+  spending    Spending[]
+}
+
+model Spending {
+  id          Int @id @default(autoincrement())
+  name        String
+  description String
+  amount      Float
+  split       Split @relation(fields: [splitId], references: [id])
+  splitId     Int
+  madeBy      Membership @relation(fields: [madeById], references: [id])
+  madeById    Int
+  splittedIn  Owing[]
+}
+
+model Owing {
+  id          Int @id @default(autoincrement())
+  value       Float
+  from        Spending @relation(fields: [spendingId], references: [id])
+  spendingId  Int
+  paidBy      Membership  @relation(fields: [paidById], references: [id])
+  paidById    Int
 }
