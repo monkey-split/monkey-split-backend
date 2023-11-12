@@ -8,7 +8,6 @@ export class SplitsService {
   constructor(private readonly prismaService: PrismaService) {}
 
   create(createSplitDto: CreateSplitDto) {
-    console.log(createSplitDto);
     return this.prismaService.split.create({
       data: {
         ...createSplitDto,
@@ -20,18 +19,28 @@ export class SplitsService {
   }
 
   findAll() {
-    return `This action returns all splits`;
+    return this.prismaService.split.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} split`;
+    return this.prismaService.split.findUnique({
+      where: { id },
+      include: {
+        members: true,
+      },
+    });
   }
 
   update(id: number, updateSplitDto: UpdateSplitDto) {
-    return `This action updates a #${id} split`;
+    return this.prismaService.split.update({
+      where: { id },
+      data: updateSplitDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} split`;
+    return this.prismaService.split.delete({
+      where: { id },
+    });
   }
 }

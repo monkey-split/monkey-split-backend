@@ -10,7 +10,6 @@ import {
 import { SplitsService } from './splits.service';
 import { CreateSplitDto } from './dto/create-split.dto';
 import { UpdateSplitDto } from './dto/update-split.dto';
-import { MembersService } from 'src/members/members.service';
 
 @Controller('splits')
 export class SplitsController {

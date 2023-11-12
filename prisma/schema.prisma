@@ -21,6 +21,7 @@ model User {
   createdSplits Split[] @relation(name: "splitCreatedBy")
 }
 
+// TODO : Add on Delete Cascade on splits delete when stopping using SQLite
 model Member {
   id            Int      @id @default(autoincrement())
   name          String
