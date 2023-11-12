@@ -6,9 +6,11 @@ import { UsersController } from './users/users.controller';
 import { UsersService } from './users/users.service';
 import { PrismaService } from './prisma/prisma.service';
 import { UsersModule } from './users/users.module';
+import { SplitsModule } from './splits/splits.module';
+import { MembersModule } from './members/members.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UsersModule],
+  imports: [ConfigModule.forRoot(), UsersModule, SplitsModule, MembersModule],
   controllers: [AppController, UsersController],
   providers: [AppService, UsersService, PrismaService],
 })
