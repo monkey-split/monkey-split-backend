@@ -10,10 +10,14 @@ import {
 import { SplitsService } from './splits.service';
 import { CreateSplitDto } from './dto/create-split.dto';
 import { UpdateSplitDto } from './dto/update-split.dto';
+import { SpendingsService } from 'src/spendings/spendings.service';
 
 @Controller('splits')
 export class SplitsController {
-  constructor(private readonly splitsService: SplitsService) {}
+  constructor(
+    private readonly splitsService: SplitsService,
+    private readonly spendingsService: SpendingsService,
+  ) {}
 
   @Post()
   create(
@@ -26,6 +30,32 @@ export class SplitsController {
     return this.splitsService.create({
       ...createSplitDto,
       createdBy: userId,
+    });
+  }
+
+  @Post(':splitId/spendings')
+  createSpending(
+    @Param()
+    { splitId }: { splitId: string },
+    @Body()
+    {
+      name,
+      description,
+      amount,
+      madeById,
+    }: {
+      name: string;
+      description: string;
+      amount: number;
+      madeById: number;
+    },
+  ) {
+    return this.spendingsService.create({
+      name,
+      description,
+      amount,
+      madeById,
+      splitId: +splitId,
     });
   }
 

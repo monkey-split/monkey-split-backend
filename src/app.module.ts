@@ -8,9 +8,10 @@ import { PrismaService } from './prisma/prisma.service';
 import { UsersModule } from './users/users.module';
 import { SplitsModule } from './splits/splits.module';
 import { MembersModule } from './members/members.module';
+import { SpendingsModule } from './spendings/spendings.module';
 
 @Module({
-  imports: [ConfigModule.forRoot(), UsersModule, SplitsModule, MembersModule],
+  imports: [ConfigModule.forRoot(), UsersModule, SplitsModule, MembersModule, SpendingsModule],
   controllers: [AppController, UsersController],
   providers: [AppService, UsersService, PrismaService],
 })
