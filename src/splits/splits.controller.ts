@@ -11,6 +11,7 @@ import { SplitsService } from './splits.service';
 import { CreateSplitDto } from './dto/create-split.dto';
 import { UpdateSplitDto } from './dto/update-split.dto';
 import { SpendingsService } from 'src/spendings/spendings.service';
+import { CreateSpendingDto } from 'src/spendings/dto/create-spending.dto';
 
 @Controller('splits')
 export class SplitsController {
@@ -38,17 +39,7 @@ export class SplitsController {
     @Param()
     { splitId }: { splitId: string },
     @Body()
-    {
-      name,
-      description,
-      amount,
-      madeById,
-    }: {
-      name: string;
-      description: string;
-      amount: number;
-      madeById: number;
-    },
+    { name, description, amount, madeById }: Omit<CreateSpendingDto, 'splitId'>,
   ) {
     return this.spendingsService.create({
       name,

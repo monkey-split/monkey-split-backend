@@ -28,18 +28,31 @@ export class SpendingsService {
   }
 
   findAll() {
-    return `This action returns all spendings`;
+    return this.prismaService.spending.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} spending`;
+    return this.prismaService.spending.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
   update(id: number, updateSpendingDto: UpdateSpendingDto) {
-    return `This action updates a #${id} spending`;
+    return this.prismaService.spending.update({
+      where: {
+        id,
+      },
+      data: updateSpendingDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} spending`;
+    return this.prismaService.spending.delete({
+      where: {
+        id,
+      },
+    });
   }
 }
