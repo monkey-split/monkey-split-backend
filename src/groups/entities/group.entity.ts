@@ -1,6 +1,6 @@
-import { Split } from '@prisma/client';
+import { Group } from '@prisma/client';
 
-export class SplitEntity implements Split {
+export class GroupEntity implements Group {
   id: number;
   name: string;
   description: string;

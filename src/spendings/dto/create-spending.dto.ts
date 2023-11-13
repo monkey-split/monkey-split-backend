@@ -6,5 +6,5 @@ export class CreateSpendingDto extends PickType(SpendingEntity, [
   'description',
   'amount',
   'madeById',
-  'splitId',
+  'groupId',
 ]) {}

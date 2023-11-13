@@ -7,7 +7,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class SpendingsService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  create({ name, description, amount, madeById, splitId }: CreateSpendingDto) {
+  create({ name, description, amount, madeById, groupId }: CreateSpendingDto) {
     return this.prismaService.spending.create({
       data: {
         name: name,
@@ -18,9 +18,9 @@ export class SpendingsService {
             id: madeById,
           },
         },
-        split: {
+        group: {
           connect: {
-            id: splitId,
+            id: groupId,
           },
         },
       },

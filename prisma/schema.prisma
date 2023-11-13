@@ -18,7 +18,7 @@ model User {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   memberships Member[]
-  createdSplits Split[] @relation(name: "splitCreatedBy")
+  createdSplits Group[] @relation(name: "groupCreatedBy")
 }
 
 // TODO : Add on Delete Cascade on splits delete when stopping using SQLite
@@ -29,18 +29,18 @@ model Member {
   updatedAt     DateTime @updatedAt
   user          User?     @relation(fields: [userId], references: [id])
   userId        Int?
-  splits        Split[]
+  splits        Group[]
   spent         Spending[]
   owes          Owing[]
 }
 
-model Split {
+model Group {
   id          Int @id @default(autoincrement())
   name        String
   description String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-  creator     User  @relation(fields: [createdBy], references: [id], name: "splitCreatedBy")
+  creator     User  @relation(fields: [createdBy], references: [id], name: "groupCreatedBy")
   createdBy   Int
   members     Member[]
   spending    Spending[]
@@ -51,8 +51,8 @@ model Spending {
   name        String
   description String
   amount      Float
-  split       Split @relation(fields: [splitId], references: [id])
-  splitId     Int
+  group       Group @relation(fields: [groupId], references: [id])
+  groupId     Int
   madeBy      Member @relation(fields: [madeById], references: [id])
   madeById    Int
   splittedIn  Owing[]

@@ -6,7 +6,7 @@ export class SpendingEntity implements Spending {
   description: string;
   amount: number;
   madeById: number;
-  splitId: number;
+  groupId: number;
   createdAt: Date;
   updatedAt: Date;
 }

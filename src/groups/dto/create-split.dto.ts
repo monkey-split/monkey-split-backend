@@ -1,8 +1,8 @@
 import { PickType } from '@nestjs/mapped-types';
-import { SplitEntity } from '../entities/split.entity';
+import { GroupEntity } from '../entities/group.entity';
 import { CreateMemberDto } from 'src/members/dto/create-member.dto';
 
-export class CreateSplitDto extends PickType(SplitEntity, [
+export class CreateGroupDto extends PickType(GroupEntity, [
   'name',
   'description',
   'createdBy',
